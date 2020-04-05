@@ -315,7 +315,6 @@ class Renderer: NSObject, MTKViewDelegate {
                 renderEncoder.popDebugGroup()
                 ////////// END 3D RENDERING //////////
  
-                /*
                 ////////// BEGIN 2D RENDERING //////////
                 renderEncoder.pushDebugGroup("2D Rendering")
                 renderEncoder.setRenderPipelineState(pipelineState2D)
@@ -330,7 +329,7 @@ class Renderer: NSObject, MTKViewDelegate {
                 
                 renderEncoder.popDebugGroup()
                 ////////// END 2D RENDERING //////////
-                 */
+                
                 renderEncoder.endEncoding()
             
                 if let drawable = view.currentDrawable {
