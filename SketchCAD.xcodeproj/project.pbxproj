@@ -1,0 +1,622 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FD4B0B3C231F24BA00F0AC98 /* SketchableBasePlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B3B231F24BA00F0AC98 /* SketchableBasePlane.swift */; };
+		FD4B0B3E231F2C7600F0AC98 /* SketchableWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B3D231F2C7600F0AC98 /* SketchableWireFrame.swift */; };
+		FD4B0B47232032F700F0AC98 /* PencilGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */; };
+		FD4B0B492320603900F0AC98 /* PencilGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */; };
+		FD9794CF231F0AFD0078705D /* SketchableSymmetryPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */; };
+		FDB1CA69231E07B600237624 /* Shader2D.metal in Sources */ = {isa = PBXBuildFile; fileRef = FDB1CA68231E07B600237624 /* Shader2D.metal */; };
+		FDD89F4E22F737D600A5A5C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F4D22F737D600A5A5C7 /* AppDelegate.swift */; };
+		FDD89F5322F737D600A5A5C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD89F5122F737D600A5A5C7 /* Main.storyboard */; };
+		FDD89F5522F737D700A5A5C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDD89F5422F737D700A5A5C7 /* Assets.xcassets */; };
+		FDD89F5822F737D700A5A5C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD89F5622F737D700A5A5C7 /* LaunchScreen.storyboard */; };
+		FDD89F6022F7381600A5A5C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F5F22F7381600A5A5C7 /* MainViewController.swift */; };
+		FDD89F6422F73AAD00A5A5C7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F6322F73AAD00A5A5C7 /* Renderer.swift */; };
+		FDD89F7022FF46B700A5A5C7 /* Shaders3D.metal in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F6F22FF46B700A5A5C7 /* Shaders3D.metal */; };
+		FDD89F732300C59A00A5A5C7 /* AAPLMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F722300C59A00A5A5C7 /* AAPLMathUtilities.m */; };
+		FDD89F772300CEC300A5A5C7 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F762300CEC300A5A5C7 /* Camera.swift */; };
+		FDD89F7B2308D98200A5A5C7 /* CubicBezierCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F7A2308D98200A5A5C7 /* CubicBezierCurve.swift */; };
+		FDD89F85230F893900A5A5C7 /* SketchCADTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F84230F893900A5A5C7 /* SketchCADTests.swift */; };
+		FDD89F8D230F925D00A5A5C7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F8C230F925D00A5A5C7 /* Extensions.swift */; };
+		FDD89F912312D27000A5A5C7 /* DrawableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F902312D27000A5A5C7 /* DrawableViewController.swift */; };
+		FDFBAA202313FFA70007C130 /* SketchableBezierCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFBAA1F2313FFA70007C130 /* SketchableBezierCurve.swift */; };
+		FDFBAA232314013A0007C130 /* Sketchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFBAA222314013A0007C130 /* Sketchable.swift */; };
+		FDFBAA25231404610007C130 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFBAA24231404610007C130 /* Vertex.swift */; };
+		FDFBAA27231406AF0007C130 /* DrawableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFBAA26231406AF0007C130 /* DrawableView.swift */; };
+		FDFBAA29231C40620007C130 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFBAA28231C40620007C130 /* ColorConstants.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FDD89F87230F893900A5A5C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FDD89F4222F737D600A5A5C7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FDD89F4922F737D600A5A5C7;
+			remoteInfo = SketchCAD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FD4B0B3B231F24BA00F0AC98 /* SketchableBasePlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableBasePlane.swift; sourceTree = "<group>"; };
+		FD4B0B3D231F2C7600F0AC98 /* SketchableWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableWireFrame.swift; sourceTree = "<group>"; };
+		FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilGestureRecognizer.swift; sourceTree = "<group>"; };
+		FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilGestureHandler.swift; sourceTree = "<group>"; };
+		FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableSymmetryPlane.swift; sourceTree = "<group>"; };
+		FDB1CA68231E07B600237624 /* Shader2D.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader2D.metal; sourceTree = "<group>"; };
+		FDD89F4A22F737D600A5A5C7 /* SketchCAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchCAD.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDD89F4D22F737D600A5A5C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FDD89F5222F737D600A5A5C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FDD89F5422F737D700A5A5C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FDD89F5722F737D700A5A5C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FDD89F5922F737D700A5A5C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDD89F5F22F7381600A5A5C7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		FDD89F6322F73AAD00A5A5C7 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		FDD89F6E22F76B6E00A5A5C7 /* RendererConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RendererConstants.h; path = ../RendererConstants.h; sourceTree = "<group>"; };
+		FDD89F6F22FF46B700A5A5C7 /* Shaders3D.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders3D.metal; sourceTree = "<group>"; };
+		FDD89F712300C59A00A5A5C7 /* AAPLMathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLMathUtilities.h; sourceTree = "<group>"; };
+		FDD89F722300C59A00A5A5C7 /* AAPLMathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLMathUtilities.m; sourceTree = "<group>"; };
+		FDD89F742300C5FC00A5A5C7 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		FDD89F762300CEC300A5A5C7 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		FDD89F7A2308D98200A5A5C7 /* CubicBezierCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubicBezierCurve.swift; sourceTree = "<group>"; };
+		FDD89F82230F893900A5A5C7 /* SketchCADTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SketchCADTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDD89F84230F893900A5A5C7 /* SketchCADTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchCADTests.swift; sourceTree = "<group>"; };
+		FDD89F86230F893900A5A5C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDD89F8C230F925D00A5A5C7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FDD89F902312D27000A5A5C7 /* DrawableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawableViewController.swift; sourceTree = "<group>"; };
+		FDFBAA1F2313FFA70007C130 /* SketchableBezierCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableBezierCurve.swift; sourceTree = "<group>"; };
+		FDFBAA222314013A0007C130 /* Sketchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sketchable.swift; sourceTree = "<group>"; };
+		FDFBAA24231404610007C130 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		FDFBAA26231406AF0007C130 /* DrawableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawableView.swift; sourceTree = "<group>"; };
+		FDFBAA28231C40620007C130 /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FDD89F4722F737D600A5A5C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDD89F7F230F893900A5A5C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FD4B0B3F23202ECD00F0AC98 /* Gesture Recognizer */ = {
+			isa = PBXGroup;
+			children = (
+				FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */,
+				FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */,
+			);
+			path = "Gesture Recognizer";
+			sourceTree = "<group>";
+		};
+		FD9794CD231F0AAE0078705D /* Sketchables */ = {
+			isa = PBXGroup;
+			children = (
+				FDFBAA222314013A0007C130 /* Sketchable.swift */,
+				FDFBAA1F2313FFA70007C130 /* SketchableBezierCurve.swift */,
+				FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */,
+				FD4B0B3B231F24BA00F0AC98 /* SketchableBasePlane.swift */,
+				FD4B0B3D231F2C7600F0AC98 /* SketchableWireFrame.swift */,
+			);
+			path = Sketchables;
+			sourceTree = "<group>";
+		};
+		FDD89F4122F737D600A5A5C7 = {
+			isa = PBXGroup;
+			children = (
+				FDD89F4C22F737D600A5A5C7 /* SketchCAD */,
+				FDD89F83230F893900A5A5C7 /* SketchCADTests */,
+				FDD89F4B22F737D600A5A5C7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FDD89F4B22F737D600A5A5C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F4A22F737D600A5A5C7 /* SketchCAD.app */,
+				FDD89F82230F893900A5A5C7 /* SketchCADTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FDD89F4C22F737D600A5A5C7 /* SketchCAD */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F742300C5FC00A5A5C7 /* Bridging-Header.h */,
+				FDD89F752300C66300A5A5C7 /* Math Utils */,
+				FD4B0B3F23202ECD00F0AC98 /* Gesture Recognizer */,
+				FDD89F6622F73DDA00A5A5C7 /* Rendering */,
+				FDD89F8E2311FFAF00A5A5C7 /* Model */,
+				FD9794CD231F0AAE0078705D /* Sketchables */,
+				FDFBAA212313FFC40007C130 /* View */,
+				FDD89F8F2312D22500A5A5C7 /* Controller */,
+				FDD89F8C230F925D00A5A5C7 /* Extensions.swift */,
+				FDD89F4D22F737D600A5A5C7 /* AppDelegate.swift */,
+				FDD89F922312D4E700A5A5C7 /* Storyboards */,
+				FDD89F5422F737D700A5A5C7 /* Assets.xcassets */,
+				FDD89F5922F737D700A5A5C7 /* Info.plist */,
+			);
+			path = SketchCAD;
+			sourceTree = "<group>";
+		};
+		FDD89F6622F73DDA00A5A5C7 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F6E22F76B6E00A5A5C7 /* RendererConstants.h */,
+				FDD89F6F22FF46B700A5A5C7 /* Shaders3D.metal */,
+				FDB1CA68231E07B600237624 /* Shader2D.metal */,
+				FDFBAA28231C40620007C130 /* ColorConstants.swift */,
+				FDD89F762300CEC300A5A5C7 /* Camera.swift */,
+				FDFBAA24231404610007C130 /* Vertex.swift */,
+				FDD89F6322F73AAD00A5A5C7 /* Renderer.swift */,
+			);
+			path = Rendering;
+			sourceTree = "<group>";
+		};
+		FDD89F752300C66300A5A5C7 /* Math Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F712300C59A00A5A5C7 /* AAPLMathUtilities.h */,
+				FDD89F722300C59A00A5A5C7 /* AAPLMathUtilities.m */,
+			);
+			path = "Math Utils";
+			sourceTree = "<group>";
+		};
+		FDD89F83230F893900A5A5C7 /* SketchCADTests */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F84230F893900A5A5C7 /* SketchCADTests.swift */,
+				FDD89F86230F893900A5A5C7 /* Info.plist */,
+			);
+			path = SketchCADTests;
+			sourceTree = "<group>";
+		};
+		FDD89F8E2311FFAF00A5A5C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F7A2308D98200A5A5C7 /* CubicBezierCurve.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FDD89F8F2312D22500A5A5C7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F5F22F7381600A5A5C7 /* MainViewController.swift */,
+				FDD89F902312D27000A5A5C7 /* DrawableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FDD89F922312D4E700A5A5C7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FDD89F5122F737D600A5A5C7 /* Main.storyboard */,
+				FDD89F5622F737D700A5A5C7 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FDFBAA212313FFC40007C130 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FDFBAA26231406AF0007C130 /* DrawableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FDD89F4922F737D600A5A5C7 /* SketchCAD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDD89F5C22F737D700A5A5C7 /* Build configuration list for PBXNativeTarget "SketchCAD" */;
+			buildPhases = (
+				FDD89F4622F737D600A5A5C7 /* Sources */,
+				FDD89F4722F737D600A5A5C7 /* Frameworks */,
+				FDD89F4822F737D600A5A5C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SketchCAD;
+			productName = SketchCAD;
+			productReference = FDD89F4A22F737D600A5A5C7 /* SketchCAD.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FDD89F81230F893900A5A5C7 /* SketchCADTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDD89F89230F893900A5A5C7 /* Build configuration list for PBXNativeTarget "SketchCADTests" */;
+			buildPhases = (
+				FDD89F7E230F893900A5A5C7 /* Sources */,
+				FDD89F7F230F893900A5A5C7 /* Frameworks */,
+				FDD89F80230F893900A5A5C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDD89F88230F893900A5A5C7 /* PBXTargetDependency */,
+			);
+			name = SketchCADTests;
+			productName = SketchCADTests;
+			productReference = FDD89F82230F893900A5A5C7 /* SketchCADTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FDD89F4222F737D600A5A5C7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = Oxymoron;
+				TargetAttributes = {
+					FDD89F4922F737D600A5A5C7 = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					FDD89F81230F893900A5A5C7 = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = FDD89F4922F737D600A5A5C7;
+					};
+				};
+			};
+			buildConfigurationList = FDD89F4522F737D600A5A5C7 /* Build configuration list for PBXProject "SketchCAD" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FDD89F4122F737D600A5A5C7;
+			productRefGroup = FDD89F4B22F737D600A5A5C7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FDD89F4922F737D600A5A5C7 /* SketchCAD */,
+				FDD89F81230F893900A5A5C7 /* SketchCADTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FDD89F4822F737D600A5A5C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDD89F5822F737D700A5A5C7 /* LaunchScreen.storyboard in Resources */,
+				FDD89F5522F737D700A5A5C7 /* Assets.xcassets in Resources */,
+				FDD89F5322F737D600A5A5C7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDD89F80230F893900A5A5C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FDD89F4622F737D600A5A5C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4B0B47232032F700F0AC98 /* PencilGestureRecognizer.swift in Sources */,
+				FD9794CF231F0AFD0078705D /* SketchableSymmetryPlane.swift in Sources */,
+				FDFBAA27231406AF0007C130 /* DrawableView.swift in Sources */,
+				FDD89F6422F73AAD00A5A5C7 /* Renderer.swift in Sources */,
+				FDFBAA202313FFA70007C130 /* SketchableBezierCurve.swift in Sources */,
+				FDD89F732300C59A00A5A5C7 /* AAPLMathUtilities.m in Sources */,
+				FDD89F7B2308D98200A5A5C7 /* CubicBezierCurve.swift in Sources */,
+				FDD89F772300CEC300A5A5C7 /* Camera.swift in Sources */,
+				FDFBAA25231404610007C130 /* Vertex.swift in Sources */,
+				FD4B0B492320603900F0AC98 /* PencilGestureHandler.swift in Sources */,
+				FD4B0B3C231F24BA00F0AC98 /* SketchableBasePlane.swift in Sources */,
+				FDD89F6022F7381600A5A5C7 /* MainViewController.swift in Sources */,
+				FD4B0B3E231F2C7600F0AC98 /* SketchableWireFrame.swift in Sources */,
+				FDFBAA232314013A0007C130 /* Sketchable.swift in Sources */,
+				FDFBAA29231C40620007C130 /* ColorConstants.swift in Sources */,
+				FDD89F8D230F925D00A5A5C7 /* Extensions.swift in Sources */,
+				FDD89F4E22F737D600A5A5C7 /* AppDelegate.swift in Sources */,
+				FDD89F7022FF46B700A5A5C7 /* Shaders3D.metal in Sources */,
+				FDB1CA69231E07B600237624 /* Shader2D.metal in Sources */,
+				FDD89F912312D27000A5A5C7 /* DrawableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDD89F7E230F893900A5A5C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDD89F85230F893900A5A5C7 /* SketchCADTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FDD89F88230F893900A5A5C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FDD89F4922F737D600A5A5C7 /* SketchCAD */;
+			targetProxy = FDD89F87230F893900A5A5C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FDD89F5122F737D600A5A5C7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD89F5222F737D600A5A5C7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD89F5622F737D700A5A5C7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD89F5722F737D700A5A5C7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FDD89F5A22F737D700A5A5C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_HEADERS_RUN_UNIFDEF = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				MTL_HEADER_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/SketchCAD/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FDD89F5B22F737D700A5A5C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_HEADERS_RUN_UNIFDEF = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				MTL_HEADER_SEARCH_PATHS = "";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/SketchCAD/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FDD89F5D22F737D700A5A5C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32U5F3JD9V;
+				INFOPLIST_FILE = SketchCAD/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = OXM.SketchCAD;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FDD89F5E22F737D700A5A5C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32U5F3JD9V;
+				INFOPLIST_FILE = SketchCAD/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = OXM.SketchCAD;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FDD89F8A230F893900A5A5C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32U5F3JD9V;
+				INFOPLIST_FILE = SketchCADTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = OXM.SketchCADTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SketchCAD.app/SketchCAD";
+			};
+			name = Debug;
+		};
+		FDD89F8B230F893900A5A5C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 32U5F3JD9V;
+				INFOPLIST_FILE = SketchCADTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = OXM.SketchCADTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SketchCAD.app/SketchCAD";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FDD89F4522F737D600A5A5C7 /* Build configuration list for PBXProject "SketchCAD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDD89F5A22F737D700A5A5C7 /* Debug */,
+				FDD89F5B22F737D700A5A5C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDD89F5C22F737D700A5A5C7 /* Build configuration list for PBXNativeTarget "SketchCAD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDD89F5D22F737D700A5A5C7 /* Debug */,
+				FDD89F5E22F737D700A5A5C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDD89F89230F893900A5A5C7 /* Build configuration list for PBXNativeTarget "SketchCADTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDD89F8A230F893900A5A5C7 /* Debug */,
+				FDD89F8B230F893900A5A5C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FDD89F4222F737D600A5A5C7 /* Project object */;
+}
