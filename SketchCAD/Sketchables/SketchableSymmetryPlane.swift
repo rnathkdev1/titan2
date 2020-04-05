@@ -25,10 +25,10 @@ class SketchableSymmetryPlane: Sketchable {
         
         // Symmetry Plane XZ plane
         let vertices = [
-            float4(bottom, 0, left, 1),
-            float4(bottom,0, right, 1),
-            float4(top, 0,left, 1),
-            float4(top, 0,right, 1)
+            SIMD4<Float>(bottom, 0, left, 1),
+            SIMD4<Float>(bottom,0, right, 1),
+            SIMD4<Float>(top, 0,left, 1),
+            SIMD4<Float>(top, 0,right, 1)
         ]
         
         // Generate vertices

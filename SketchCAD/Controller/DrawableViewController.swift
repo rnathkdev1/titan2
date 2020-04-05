@@ -75,10 +75,10 @@ class DrawableViewController: UIViewController {
     // FIXME: Remove and formalize this
     func addDrawableObject() {
         // Create a viewable cubic bezier curve
-        let p0 = float3(1.0, 1.0, 1.0)
-        let p1 = float3(2.0, 1.0, 1.0)
-        let p2 = float3(3.0, 1.0, 1.0)
-        let p3 = float3(4.0, 1.0, 1.0)
+        let p0 = SIMD3<Float>(1.0, 1.0, 1.0)
+        let p1 = SIMD3<Float>(2.0, 1.0, 1.0)
+        let p2 = SIMD3<Float>(3.0, 1.0, 1.0)
+        let p3 = SIMD3<Float>(4.0, 1.0, 1.0)
         
         let c = CubicBezierCurve(P0: p0, P1: p1, P2: p2, P3: p3)
         let skc = SketchableBezierCurve(curve: c)

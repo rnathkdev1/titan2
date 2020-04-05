@@ -27,20 +27,20 @@ class SketchableBezierCurve: Sketchable {
     
     private func calculateSketchableVertices() {
         let vertices = [
-            float4(-1.0, 1.0, 1.0, 1.0),     // Front-top-left
-            float4(1.0, 1.0, 1.0, 1.0),      // Front-top-right
-            float4(-1.0, -1.0, 1.0,  1.0),   // Front-bottom-left
-            float4(1.0, -1.0, 1.0, 1.0),     // Front-bottom-right
-            float4(1.0, -1.0, -1.0, 1.0),    // Back-bottom-right
-            float4(1.0, 1.0, 1.0,  1.0),     // Front-top-right
-            float4(1.0, 1.0, -1.0, 1.0),     // Back-top-right
-            float4(-1.0, 1.0, 1.0,  1.0),    // Front-top-left
-            float4(-1.0, 1.0, -1.0, 1.0),    // Back-top-left
-            float4(-1.0, -1.0, 1.0, 1.0),    // Front-bottom-left
-            float4(-1.0, -1.0, -1.0, 1.0),   // Back-bottom-left
-            float4(1.0, -1.0, -1.0,  1.0),   // Back-bottom-right
-            float4(-1.0, 1.0, -1.0, 1.0),    // Back-top-left
-            float4(1.0, 1.0, -1.0,  1.0)     // Back-top-right
+            SIMD4<Float>(-1.0, 1.0, 1.0, 1.0),     // Front-top-left
+            SIMD4<Float>(1.0, 1.0, 1.0, 1.0),      // Front-top-right
+            SIMD4<Float>(-1.0, -1.0, 1.0,  1.0),   // Front-bottom-left
+            SIMD4<Float>(1.0, -1.0, 1.0, 1.0),     // Front-bottom-right
+            SIMD4<Float>(1.0, -1.0, -1.0, 1.0),    // Back-bottom-right
+            SIMD4<Float>(1.0, 1.0, 1.0,  1.0),     // Front-top-right
+            SIMD4<Float>(1.0, 1.0, -1.0, 1.0),     // Back-top-right
+            SIMD4<Float>(-1.0, 1.0, 1.0,  1.0),    // Front-top-left
+            SIMD4<Float>(-1.0, 1.0, -1.0, 1.0),    // Back-top-left
+            SIMD4<Float>(-1.0, -1.0, 1.0, 1.0),    // Front-bottom-left
+            SIMD4<Float>(-1.0, -1.0, -1.0, 1.0),   // Back-bottom-left
+            SIMD4<Float>(1.0, -1.0, -1.0,  1.0),   // Back-bottom-right
+            SIMD4<Float>(-1.0, 1.0, -1.0, 1.0),    // Back-top-left
+            SIMD4<Float>(1.0, 1.0, -1.0,  1.0)     // Back-top-right
         ]
         
         var verticesWithColor = [Vertex]()

@@ -9,11 +9,11 @@
 import Foundation
 
 enum ColorConstants {
-    static let worldCurve = float4 (1.0, 0.0, 0.0, 1.0)
-    static let screenCurve = float4 (0.0, 1.0, 0.0, 1.0)
-    static let basePlane = float4(0.827, 0.827, 0.827, 0.4)
-    static let baseWireFrame = float4(0.0, 0.0, 0.0, 0.4)
-    static let symmetryPlane = float4(0.827, 0.827, 0.827, 0.3)
+    static let worldCurve = SIMD4<Float> (1.0, 0.0, 0.0, 1.0)
+    static let screenCurve = SIMD4<Float> (0.0, 1.0, 0.0, 1.0)
+    static let basePlane = SIMD4<Float>(0.827, 0.827, 0.827, 0.4)
+    static let baseWireFrame = SIMD4<Float>(0.0, 0.0, 0.0, 0.4)
+    static let symmetryPlane = SIMD4<Float>(0.827, 0.827, 0.827, 0.3)
 }
 
 enum ColorIndex: Int, CaseIterable {
@@ -23,7 +23,7 @@ enum ColorIndex: Int, CaseIterable {
     case symmetryPlane
     case baseWireFrame
     
-    func getColorValues() -> float4 {
+    func getColorValues() -> SIMD4<Float> {
         switch self {
         case .worldCurve:
             return ColorConstants.worldCurve

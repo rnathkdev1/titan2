@@ -9,6 +9,6 @@
 import Foundation
 
 struct Vertex {
-    var position: float4
+    var position: SIMD4<Float>
     var colorIndex: UInt16
 }

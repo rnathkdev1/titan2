@@ -126,13 +126,13 @@ class Renderer: NSObject, MTKViewDelegate {
     // MARK: Methods
     func setupConstantColorBuffer() {
         // Look into the ColorConstants and setup the buffer
-        var colors = [float4]()
+        var colors = [SIMD4<Float>]()
         
         for t in ColorIndex.allCases {
             colors.append(t.getColorValues())
         }
         
-        self.colorBuffer = device.makeBuffer(bytes: colors, length: colors.count * MemoryLayout<float4>.stride, options: [])
+        self.colorBuffer = device.makeBuffer(bytes: colors, length: colors.count * MemoryLayout<SIMD4<Float>>.stride, options: [])
     }
     
     class func buildMetalVertexDescriptor3D() -> MTLVertexDescriptor {
@@ -145,14 +145,14 @@ class Renderer: NSObject, MTKViewDelegate {
         //|  Attribute 0 | Attribute 1|
         //----------------------------|
         
-        // There is one float4 color and one index in a single struct.
+        // There is one SIMD4<Float> color and one index in a single struct.
         // Both are part of the same vertex buffer.
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].format = MTLVertexFormat.float4
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].offset = 0
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].bufferIndex = BufferIndex.positions3D.rawValue
         
         mtlVertexDescriptor.attributes[VertexAttribute.index.rawValue].format = MTLVertexFormat.ushort
-        mtlVertexDescriptor.attributes[VertexAttribute.index.rawValue].offset = MemoryLayout<float4>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.index.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].bufferIndex = BufferIndex.positions3D.rawValue
     
         mtlVertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
@@ -344,7 +344,7 @@ class Renderer: NSObject, MTKViewDelegate {
 
 
 // Generic matrix math utility functions
-func matrix4x4_rotation(radians: Float, axis: float3) -> matrix_float4x4 {
+func matrix4x4_rotation(radians: Float, axis: SIMD3<Float>) -> matrix_float4x4 {
     let unitAxis = normalize(axis)
     let ct = cosf(radians)
     let st = sinf(radians)

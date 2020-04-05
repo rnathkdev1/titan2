@@ -40,21 +40,21 @@ class Camera {
     
     // MARK: Position properties
     // Position in space
-    private var position: float3 {
+    private var position: SIMD3<Float> {
         didSet {
             updateCamera()
         }
     }
     
     // Unit vector that points forward
-    private var forward: float3 {
+    private var forward: SIMD3<Float> {
         didSet {
             updateCamera()
         }
     }
     
     // Unit vector that points up
-    private var up: float3 {
+    private var up: SIMD3<Float> {
         didSet {
             updateCamera()
         }
@@ -70,9 +70,9 @@ class Camera {
         let aspectRatio = Float(viewSize.width/viewSize.height)
         self.verticalViewAngle = radians_from_degrees(45)
         self.zoom = 1.0
-        self.position = float3(20, 20, 0)
-        let lookAt = float3(0, 0, 0)
-        self.up = float3(0, 0, 1)
+        self.position = SIMD3<Float>(20, 20, 0)
+        let lookAt = SIMD3<Float>(0, 0, 0)
+        self.up = SIMD3<Float>(0, 0, 1)
         self.forward = normalize(lookAt - self.position);
         
         self.projectionMatrix = matrix_perspective(zoom * verticalViewAngle, aspectRatio, nearZ, farZ)

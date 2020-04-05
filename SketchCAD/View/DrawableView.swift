@@ -38,9 +38,9 @@ class DrawableView: MTKView {
     
     func addScreenCurve() {
         let vertices = [
-            float4(-1, -1, 0, 1),
-            float4(1, -1, 0, 1),
-            float4(0,  0, 0, 1),
+            SIMD4<Float>(-1, -1, 0, 1),
+            SIMD4<Float>(1, -1, 0, 1),
+            SIMD4<Float>(0,  0, 0, 1),
         ]
         
         var indexedVertices = [Vertex]()
