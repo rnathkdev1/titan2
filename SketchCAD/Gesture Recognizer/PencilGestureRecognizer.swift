@@ -14,8 +14,6 @@ class PencilGestureRecognizer: UIGestureRecognizer {
     /// Touch that we are currently tracking
     var currentTouch: UITouch!
     
-    
-    
     override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)
         

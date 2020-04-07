@@ -34,7 +34,6 @@ class Renderer: NSObject, MTKViewDelegate {
     
     var vertexBuffer3D: MTLBuffer!
     var vertexBuffer2D: MTLBuffer!
-    
     var colorBuffer: MTLBuffer!
     
     var sketchableLine = [Sketchable]()
@@ -134,31 +133,63 @@ class Renderer: NSObject, MTKViewDelegate {
         
         self.colorBuffer = device.makeBuffer(bytes: colors, length: colors.count * MemoryLayout<SIMD4<Float>>.stride, options: [])
     }
-    
+    /**
+     Vertex Descriptor for 3D and 2D rendering.
+     */
     class func buildMetalVertexDescriptor3D() -> MTLVertexDescriptor {
         let mtlVertexDescriptor = MTLVertexDescriptor()
         
         // Vertex descriptor is the following:
         //----------------------------|
         //| x   y   z  1 | ColorIndex |
-        //----------------------------| - Buffer 0
-        //|  Attribute 0 | Attribute 1|
+        //----------------------------| - Buffer BufferIndexPositions3D
+        //|  Attribute a | Attribute b| - a: VertexAttributePosition3D b:VertexAttributeIndex
         //----------------------------|
-        
+        //|<---------Stride---------->|
+
         // There is one SIMD4<Float> color and one index in a single struct.
         // Both are part of the same vertex buffer.
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].format = MTLVertexFormat.float4
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].offset = 0
         mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].bufferIndex = BufferIndex.positions3D.rawValue
         
-        mtlVertexDescriptor.attributes[VertexAttribute.index.rawValue].format = MTLVertexFormat.ushort
-        mtlVertexDescriptor.attributes[VertexAttribute.index.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
-        mtlVertexDescriptor.attributes[VertexAttribute.position3D.rawValue].bufferIndex = BufferIndex.positions3D.rawValue
-    
+        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
+        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        
         mtlVertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
         
         return mtlVertexDescriptor
     }
+    
+    /**
+     Vertex descriptor for line rendering
+     */
+    class func buildMetalVertexDescriptorLine() -> MTLVertexDescriptor {
+        let mtlVertexDescriptor = MTLVertexDescriptor()
+        
+        // Vertex descriptor is the following:
+        //-------------------------------------------------|
+        //| ThisIndex | NextIndex | PrevIndex | ColorIndex |
+        //-------------------------------------------------| - Buffer BufferIndexPositionsLine
+        //| Attribute | Attribute | Attribute | Attribute  | - attributes are: ThisIndex, NextIndex, PrevIndex, ColorIndex
+        //-------------------------------------------------|
+        //|<----------------Stride------------------------>|
+
+        // There is one SIMD4<Float> color and one index in a single struct.
+        // Both are part of the same vertex buffer.
+        mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].format = MTLVertexFormat.ushort
+        mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].offset = 0
+        mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        
+        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
+        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        
+        mtlVertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
+        
+        return mtlVertexDescriptor
+    }
+    
+    
     
     func buildRenderPipelineWithDevice(device: MTLDevice,
                                          canvas: MTKView,
@@ -277,8 +308,7 @@ class Renderer: NSObject, MTKViewDelegate {
                 renderEncoder.setFrontFacing(.counterClockwise)
                 renderEncoder.setDepthStencilState(depthState)
                 
-                
-                ////////// BEGIN 3D RENDERING //////////
+                //MARK: 3D Rendering
                 renderEncoder.pushDebugGroup("3D Rendering")
                 renderEncoder.setRenderPipelineState(pipelineState3D)
                 
@@ -297,7 +327,7 @@ class Renderer: NSObject, MTKViewDelegate {
                     // And finally, we draw each of them
                     var offset = 0
                     
-                    // FIXME: Parallellize this
+                    //FIXME: Parallellize this
                     for obj in self.sketchable3D {
                         let countVertices = obj.sketchableVertices.count
                         
@@ -313,9 +343,8 @@ class Renderer: NSObject, MTKViewDelegate {
                 }
                 
                 renderEncoder.popDebugGroup()
-                ////////// END 3D RENDERING //////////
  
-                ////////// BEGIN 2D RENDERING //////////
+                //MARK: 2D Rendering
                 renderEncoder.pushDebugGroup("2D Rendering")
                 renderEncoder.setRenderPipelineState(pipelineState2D)
                 
@@ -328,7 +357,6 @@ class Renderer: NSObject, MTKViewDelegate {
                 }
                 
                 renderEncoder.popDebugGroup()
-                ////////// END 2D RENDERING //////////
                 
                 renderEncoder.endEncoding()
             

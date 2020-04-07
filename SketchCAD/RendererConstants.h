@@ -23,6 +23,7 @@
 typedef NS_ENUM(NSInteger, BufferIndex)
 {
     BufferIndexPositions3D = 0,
+    BufferIndexPositionsLine = 1,
     BufferIndexUniforms = 2,
     BufferIndexColors = 3,
 };
@@ -31,8 +32,12 @@ typedef NS_ENUM(NSInteger, BufferIndex)
 typedef NS_ENUM(NSInteger, VertexAttribute)
 {
     VertexAttributePosition3D  = 0,
-    VertexAttributeIndex = 2,
+    VertexAttributeColorIndex = 2,
     VertexAttributeIndex2D = 3,
+
+    VertexAttributeThisIndex = 4,
+    VertexAttributeNextIndex = 5,
+    VertexAttributePrevIndex = 6,
 };
 
 // Camera parameters

@@ -18,7 +18,7 @@ typedef struct
     // attribute(VertexAttributePosition) is related to
     // MTLVertexDescriptor attribute
     float4 position [[attribute(VertexAttributePosition3D)]];
-    uint16_t colorIndex [[attribute(VertexAttributeIndex)]];
+    uint16_t colorIndex [[attribute(VertexAttributeColorIndex)]];
 } VertexIn;
 
 typedef struct
