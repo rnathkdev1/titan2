@@ -155,6 +155,7 @@ class Renderer: NSObject, MTKViewDelegate {
         
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].bufferIndex = BufferIndex.positions3D.rawValue
         
         mtlVertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
         
@@ -181,9 +182,19 @@ class Renderer: NSObject, MTKViewDelegate {
         mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].offset = 0
         mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
+        mtlVertexDescriptor.attributes[VertexAttribute.nextIndex.rawValue].format = MTLVertexFormat.ushort
+        mtlVertexDescriptor.attributes[VertexAttribute.nextIndex.rawValue].offset = MemoryLayout<ushort>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.nextIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        
+        mtlVertexDescriptor.attributes[VertexAttribute.prevIndex.rawValue].format = MTLVertexFormat.ushort
+        mtlVertexDescriptor.attributes[VertexAttribute.prevIndex.rawValue].offset = MemoryLayout<ushort>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.prevIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
+        //FIXME: Change this to LineVertex
         mtlVertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
         
         return mtlVertexDescriptor
