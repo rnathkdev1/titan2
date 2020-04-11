@@ -35,9 +35,9 @@ typedef NS_ENUM(NSInteger, VertexAttribute)
     VertexAttributeColorIndex = 2,
     VertexAttributeIndex2D = 3,
 
-    VertexAttributeThisIndex = 4,
-    VertexAttributeNextIndex = 5,
-    VertexAttributePrevIndex = 6,
+    VertexAttributeThisVertex = 4,
+    VertexAttributeNextVertex = 5,
+    VertexAttributePrevVertex = 6,
 };
 
 // Camera parameters
@@ -45,6 +45,7 @@ typedef struct
 {
     matrix_float4x4 projectionMatrix;
     matrix_float4x4 modelViewMatrix;
+    float aspectRatio; 
 } Transforms;
 
 // Color constant parameters

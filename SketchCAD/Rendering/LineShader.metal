@@ -15,16 +15,15 @@ using namespace metal;
 #import "../RendererConstants.h"
 
 using namespace metal;
-/*
+
 typedef struct
 {
     // attribute(VertexAttributePosition) is related to
     // MTLVertexDescriptor attribute
-    //float4 position [[attribute(VertexAttributePosition3D)]];
-    uint16_t vertexIndex [[attribute(VertexAttributePosition3D)]];;
-    uint16_t nextVertexIndex [[attribute(1)]];;
-    uint16_t prevVertexIndex [[attribute(10)]];;
-    uint16_t colorIndex [[attribute(VertexAttributeIndex)]];
+    float4 thisVertex [[attribute(VertexAttributeThisVertex)]];;
+    float4 nextVertex [[attribute(VertexAttributeNextVertex)]];;
+    float4 prevVertex[[attribute(VertexAttributePrevVertex)]];;
+    uint16_t colorIndex [[attribute(VertexAttributeColorIndex)]];
 } VertexIn;
 
 typedef struct
@@ -34,20 +33,35 @@ typedef struct
     float4 color;
 } VertexOut;
 
-vertex VertexOut vertexShader3D(VertexIn vertex_in [[stage_in]],
+vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
                               constant Colors *color_in [[buffer(BufferIndexColors)]],
                               constant Transforms& uniforms [[buffer(BufferIndexUniforms)]]) {
-    
     VertexOut out;
-    out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.position;
+    float4 clipSpaceThis = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.thisVertex;
+    float4 clipSpaceNext = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.nextVertex;
+    float4 clipSpacePrev = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.prevVertex;
+    
+    // Find the tangent
+    float4 dir = normalize(clipSpaceNext - clipSpaceThis);
+    
+    // Find the normal
+    float4 normal = float4(-dir.y, dir.x, dir.z, dir.w);
+    float thickness = 0.2;
+    normal *= thickness/2.0;
+    
+    // TODO:
+    
+    
+    
+    
+    out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.thisVertex;
     uint16_t ind = vertex_in.colorIndex;
     out.color = color_in[ind].color;
     return out;
      
 }
 
-fragment half4 fragmentShader3D(VertexOut in [[stage_in]]) {
+fragment half4 fragmentShaderLine(VertexOut in [[stage_in]]) {
     
     return half4(in.color);
 }
-*/

@@ -170,32 +170,31 @@ class Renderer: NSObject, MTKViewDelegate {
         
         // Vertex descriptor is the following:
         //-------------------------------------------------|
-        //| ThisIndex | NextIndex | PrevIndex | ColorIndex |
+        //| ThisVertex| NextVertex | PrevVertex| ColorIndex|
         //-------------------------------------------------| - Buffer BufferIndexPositionsLine
-        //| Attribute | Attribute | Attribute | Attribute  | - attributes are: ThisIndex, NextIndex, PrevIndex, ColorIndex
+        //| Attribute | Attribute  | Attribute | Attribute | - attributes are: ThisVertex, NextVertex, PrevVertex, ColorIndex
         //-------------------------------------------------|
         //|<----------------Stride------------------------>|
 
         // There is one SIMD4<Float> color and one index in a single struct.
         // Both are part of the same vertex buffer.
-        mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].format = MTLVertexFormat.ushort
-        mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].offset = 0
-        mtlVertexDescriptor.attributes[VertexAttribute.thisIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        mtlVertexDescriptor.attributes[VertexAttribute.thisVertex.rawValue].format = MTLVertexFormat.float4
+        mtlVertexDescriptor.attributes[VertexAttribute.thisVertex.rawValue].offset = 0
+        mtlVertexDescriptor.attributes[VertexAttribute.thisVertex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
-        mtlVertexDescriptor.attributes[VertexAttribute.nextIndex.rawValue].format = MTLVertexFormat.ushort
-        mtlVertexDescriptor.attributes[VertexAttribute.nextIndex.rawValue].offset = MemoryLayout<ushort>.stride
-        mtlVertexDescriptor.attributes[VertexAttribute.nextIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].format = MTLVertexFormat.float4
+        mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
-        mtlVertexDescriptor.attributes[VertexAttribute.prevIndex.rawValue].format = MTLVertexFormat.ushort
-        mtlVertexDescriptor.attributes[VertexAttribute.prevIndex.rawValue].offset = MemoryLayout<ushort>.stride
-        mtlVertexDescriptor.attributes[VertexAttribute.prevIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].format = MTLVertexFormat.float4
+        mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
-        //FIXME: Change this to LineVertex
-        mtlVertexDescriptor.layouts[0].stride = MemoryLayout<Vertex>.stride
+        mtlVertexDescriptor.layouts[0].stride = MemoryLayout<LineVertex>.stride
         
         return mtlVertexDescriptor
     }
@@ -263,6 +262,7 @@ class Renderer: NSObject, MTKViewDelegate {
         uniforms[0].projectionMatrix = self.camera.projectionMatrix
         let modelMatrix = matrix4x4_rotation(rotation, vector_float3(1, 0, 0))
         let viewMatrix = self.camera.viewMatrix
+        uniforms[0].aspectRatio = self.camera.aspectRatio; 
         uniforms[0].modelViewMatrix = simd_mul(viewMatrix, modelMatrix)
         rotation += step;
     }
@@ -287,6 +287,10 @@ class Renderer: NSObject, MTKViewDelegate {
                                           length: indexedVertices2D.count * MemoryLayout<Vertex>.stride,
                                           options: [])!
         vertexCount2D = indexedVertices2D.count
+    }
+    
+    func addVerticesLine(vertices: [LineVertex]) {
+        
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {

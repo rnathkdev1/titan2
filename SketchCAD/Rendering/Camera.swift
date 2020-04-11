@@ -63,11 +63,12 @@ class Camera {
     // MARK: Matrices
     private(set) var projectionMatrix: matrix_float4x4
     private(set) var viewMatrix: matrix_float4x4
+    private(set) var aspectRatio: Float
     
     // Initializer for camera
     init(canvas: MTKView) {
         self.viewSize = canvas.bounds.size
-        let aspectRatio = Float(viewSize.width/viewSize.height)
+        self.aspectRatio = Float(viewSize.width/viewSize.height)
         self.verticalViewAngle = radians_from_degrees(45)
         self.zoom = 1.0
         self.position = SIMD3<Float>(20, 20, 0)
@@ -84,7 +85,7 @@ class Camera {
     
     // Update projection and view matrices.
     func updateCamera() {
-        let aspectRatio = Float(viewSize.width/viewSize.height)
+        self.aspectRatio = Float(viewSize.width/viewSize.height)
         let lookAt = self.position + forward;
         self.projectionMatrix = matrix_perspective(zoom * verticalViewAngle, aspectRatio, nearZ, farZ)
         self.viewMatrix = matrix_look_at(position[0], position[1], position[2],
