@@ -24,15 +24,12 @@ class DrawableView: MTKView {
     }
     
     func addObject3D(curve: Sketchable) {
-        
         worldCurves.append(curve);
         
         guard let renderer = self.delegate as? Renderer else {
-            //FIXME: Add an error message
-            print("Delegate is not Renderer")
+            print("Delegate of this view is not of type Renderer")
             return;
         }
-        
         renderer.addObject3D(curve: curve)
     }
     
@@ -73,7 +70,7 @@ class DrawableView: MTKView {
         let lineVertices = preparePointsForRendering(points: points)
         guard let renderer = self.delegate as? Renderer else {
             //FIXME: Add an error message
-            print("Delegate is not Renderer")
+            print("Delegate is not of type Renderer")
             return;
         }
         
