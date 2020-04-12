@@ -69,14 +69,7 @@ class DrawableView: MTKView {
             let z = Float(4.0);
             points.append(SIMD4<Float>(Float(x),y,z,1))
         }
-        
-        /*
-        let points = [
-            SIMD4<Float>(6,5,5,1),
-            SIMD4<Float>(-6,5,5,1)
-        ];*/
-        
-        
+
         let lineVertices = preparePointsForRendering(points: points)
         guard let renderer = self.delegate as? Renderer else {
             //FIXME: Add an error message
