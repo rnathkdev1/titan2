@@ -12,6 +12,6 @@ struct LineVertex {
     var thisVertex: SIMD4<Float> = SIMD4<Float>(-1, -1, -1, -1)
     var nextVertex: SIMD4<Float> = SIMD4<Float>(-1, -1, -1, -1)
     var prevVertex: SIMD4<Float> = SIMD4<Float>(-1, -1, -1, -1)
+    var direction: Int32
     var colorIndex: ushort = 0
-    var direction: Int8
 }

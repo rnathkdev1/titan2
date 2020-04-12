@@ -23,22 +23,26 @@
 typedef NS_ENUM(NSInteger, BufferIndex)
 {
     BufferIndexPositions3D = 0,
-    BufferIndexPositionsLine = 1,
-    BufferIndexUniforms = 2,
-    BufferIndexColors = 3,
+    // This can be the same buffer index
+    // since they are different vertex descriptors.
+    BufferIndexPositionsLine = 0,
+    BufferIndexUniforms = 1,
+    BufferIndexColors = 2,
 };
 
 // MetalVertexDescriptor parameters
 typedef NS_ENUM(NSInteger, VertexAttribute)
 {
     VertexAttributePosition3D  = 0,
-    VertexAttributeColorIndex = 2,
-    VertexAttributeIndex2D = 3,
+    VertexAttributeColorIndex = 1,
+    VertexAttributeIndex2D = 2,
 
-    VertexAttributeThisVertex = 4,
-    VertexAttributeNextVertex = 5,
-    VertexAttributePrevVertex = 6,
-    VertexAttributeDirection = 7,
+    // These are part of a different vertex descriptor
+    VertexAttributeThisVertex = 1,
+    VertexAttributeNextVertex = 2,
+    VertexAttributePrevVertex = 3,
+    VertexAttributeDirection = 4,
+    VertexAttributeLineColorIndex = 5,
 };
 
 // Camera parameters

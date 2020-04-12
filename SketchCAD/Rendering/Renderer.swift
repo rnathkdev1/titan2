@@ -25,25 +25,27 @@ class Renderer: NSObject, MTKViewDelegate {
     public let device: MTLDevice!
     
     var indexedVertices2D = [Vertex]()
+    var indexedVerticesLine = [LineVertex]()
     
+    var vertexCount3D = 0
+    var vertexCount2D = 0
+    var vertexCountLine = 0
+    
+    var vertexBuffer3D: MTLBuffer!
+    var vertexBuffer2D: MTLBuffer!
+    var vertexBufferLine: MTLBuffer!
+    var colorBuffer: MTLBuffer!
     var dynamicUniformBuffer: MTLBuffer!
+    var indexBuffer: MTLBuffer!
     
     // For max buffers in flight
     var uniformBufferIndex = 0
     var uniformBufferOffset = 0
     
-    var vertexBuffer3D: MTLBuffer!
-    var vertexBuffer2D: MTLBuffer!
-    var colorBuffer: MTLBuffer!
-    
     var sketchableLine = [Sketchable]()
     var sketchable3D = [Sketchable]()
     var sketchable2D = [Sketchable]()
     
-    var vertexCount3D = 0
-    var vertexCount2D = 0
-    
-    var indexBuffer: MTLBuffer!
     var uniforms: UnsafeMutablePointer<Transforms>!
     
     var projectionMatrix: matrix_float4x4 = matrix_float4x4()
@@ -51,9 +53,9 @@ class Renderer: NSObject, MTKViewDelegate {
     
     var pipelineState3D: MTLRenderPipelineState!
     var pipelineState2D: MTLRenderPipelineState!
+    var pipelineStateLine: MTLRenderPipelineState!
     
     var depthState: MTLDepthStencilState!
-    
     
     // MARK: Init method
     init?(canvas: MTKView) {
@@ -88,6 +90,7 @@ class Renderer: NSObject, MTKViewDelegate {
         canvas.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 1.0)
         
         let mtlVertexDescriptor3D = Renderer.buildMetalVertexDescriptor3D()
+        let mtlVertexDescriptorLine = Renderer.buildMetalVertexDescriptorLine()
         
         do {
             self.pipelineState3D = try buildRenderPipelineWithDevice(device: device,
@@ -103,6 +106,14 @@ class Renderer: NSObject, MTKViewDelegate {
                                                                      vertexShader: "vertexShader2D",
                                                                      fragmentShader: "fragmentShader2D",
                                                                      label: "2D Pipeline State")
+            
+            self.pipelineStateLine = try buildRenderPipelineWithDevice(device: device,
+                                                                     canvas: canvas,
+                                                                     mtlVertexDescriptor: mtlVertexDescriptorLine,
+                                                                     vertexShader: "vertexShaderLine",
+                                                                     fragmentShader: "fragmentShaderLine",
+                                                                     label: "Line Pipeline State")
+            
  
         } catch {
             print("Unable to compile render pipeline state.  Error info: \(error)")
@@ -117,7 +128,6 @@ class Renderer: NSObject, MTKViewDelegate {
         }
         
         self.depthState = state
-        
     }
     
     
@@ -132,6 +142,7 @@ class Renderer: NSObject, MTKViewDelegate {
         }
         
         self.colorBuffer = device.makeBuffer(bytes: colors, length: colors.count * MemoryLayout<SIMD4<Float>>.stride, options: [])
+        self.colorBuffer.label = "Color Buffer"
     }
     /**
      Vertex Descriptor for 3D and 2D rendering.
@@ -182,21 +193,29 @@ class Renderer: NSObject, MTKViewDelegate {
         mtlVertexDescriptor.attributes[VertexAttribute.thisVertex.rawValue].offset = 0
         mtlVertexDescriptor.attributes[VertexAttribute.thisVertex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
+        var cumulativeOffset = MemoryLayout<SIMD4<Float>>.stride
+        
         mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].format = MTLVertexFormat.float4
-        mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].offset = cumulativeOffset
         mtlVertexDescriptor.attributes[VertexAttribute.nextVertex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
+        cumulativeOffset += MemoryLayout<SIMD4<Float>>.stride
+        
         mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].format = MTLVertexFormat.float4
-        mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].offset = cumulativeOffset
         mtlVertexDescriptor.attributes[VertexAttribute.prevVertex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
-        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
-        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
-        mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        cumulativeOffset += MemoryLayout<SIMD4<Float>>.stride
         
-        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].format = MTLVertexFormat.uint2
-        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].offset = MemoryLayout<Int8>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].format = MTLVertexFormat.int
+        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].offset = cumulativeOffset
         mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        
+        cumulativeOffset += MemoryLayout<Int32>.stride
+        
+        mtlVertexDescriptor.attributes[VertexAttribute.lineColorIndex.rawValue].format = MTLVertexFormat.ushort
+        mtlVertexDescriptor.attributes[VertexAttribute.lineColorIndex.rawValue].offset = cumulativeOffset
+        mtlVertexDescriptor.attributes[VertexAttribute.lineColorIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
         mtlVertexDescriptor.layouts[0].stride = MemoryLayout<LineVertex>.stride
         
@@ -290,11 +309,17 @@ class Renderer: NSObject, MTKViewDelegate {
         vertexBuffer2D = device.makeBuffer(bytes: indexedVertices2D,
                                           length: indexedVertices2D.count * MemoryLayout<Vertex>.stride,
                                           options: [])!
+        vertexBuffer2D.label = "2D Vertex buffer"
         vertexCount2D = indexedVertices2D.count
     }
     
     func addVerticesLine(vertices: [LineVertex]) {
-        
+        indexedVerticesLine.append(contentsOf: vertices)
+        vertexBufferLine = device.makeBuffer(bytes: indexedVerticesLine,
+                                             length: indexedVerticesLine.count * MemoryLayout<LineVertex>.stride,
+                                             options: [])!
+        vertexBufferLine.label = "Line Vertex Buffer"
+        vertexCountLine = indexedVerticesLine.count
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
@@ -377,6 +402,18 @@ class Renderer: NSObject, MTKViewDelegate {
                 
                 renderEncoder.popDebugGroup()
                 
+                // MARK: Line Rendering
+                renderEncoder.pushDebugGroup("Line Rendering")
+                renderEncoder.setRenderPipelineState(pipelineStateLine)
+                
+                if indexedVerticesLine.count > 0 {
+                    // Set line position buffer
+                    renderEncoder.setVertexBuffer(vertexBufferLine, offset: 0, index: BufferIndex.positionsLine.rawValue)
+                    
+                    // And finally, we draw
+                    renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: vertexCountLine)
+                }
+                renderEncoder.popDebugGroup()
                 renderEncoder.endEncoding()
             
                 if let drawable = view.currentDrawable {

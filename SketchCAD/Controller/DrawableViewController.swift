@@ -93,7 +93,8 @@ class DrawableViewController: UIViewController {
         drawableCanvas.addObject3D(curve: SketchableBasePlane())
         drawableCanvas.addObject3D(curve: SketchableWireFrame())
         drawableCanvas.addObject3D(curve: SketchableSymmetryPlane())
-        drawableCanvas.addScreenCurve();
+        //drawableCanvas.addScreenCurve()
+        drawableCanvas.addLine()
     }
     
     

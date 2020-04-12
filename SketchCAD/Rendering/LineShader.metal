@@ -23,8 +23,8 @@ typedef struct
     float4 thisVertex [[attribute(VertexAttributeThisVertex)]];;
     float4 nextVertex [[attribute(VertexAttributeNextVertex)]];;
     float4 prevVertex[[attribute(VertexAttributePrevVertex)]];;
-    ushort colorIndex [[attribute(VertexAttributeColorIndex)]];
-    int8_t direction[[attribute(VertexAttributeDirection)]];
+    int32_t direction[[attribute(VertexAttributeDirection)]];
+    ushort colorIndex [[attribute(VertexAttributeLineColorIndex)]];
 } VertexIn;
 
 typedef struct
@@ -56,20 +56,22 @@ vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
     prevNDC *= uniforms.aspectRatio;
     
     // Find the tangent
-    float2 dir = normalize(nextNDC - thisNDC);
-    
+    float2 dir;
+    if (vertex_in.nextVertex.w > 0)
+        dir = normalize(nextNDC - thisNDC);
+    else
+        dir = normalize(thisNDC - prevNDC);
     
     // Find the normal
     float2 normal = float2(-dir.y, dir.x);
     
     // Extrude from center and correct aspect ratio
-    float thickness = 0.2;
+    float thickness = 0.4;
     normal *= thickness/2.0;
     normal.x /= uniforms.aspectRatio;
     
     // Offset the point in the direction
-    float direction = -1;
-    normal *= direction;
+    normal *= vertex_in.direction;
     
     float4 offset = float4(normal.x, normal.y, 0.0, 1);
     
