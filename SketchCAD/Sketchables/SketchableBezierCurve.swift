@@ -10,13 +10,15 @@ import Foundation
 import MetalKit
 
 // This is the Bezier curve that is seen on screen
-class SketchableBezierCurve: Sketchable {
+class SketchableBezierCurve {
     var primitiveType: MTLPrimitiveType = .triangleStrip
-    var sketchableVertices = [Vertex]()
+    var sketchableVertices = [LineVertex]()
     
     var cubicBezierCurve: CubicBezierCurve
     var controlPointsVisible: Bool
     var isSelected: Bool
+    
+    let sampleCount = 50;
     
     init(curve: CubicBezierCurve){
         self.cubicBezierCurve = curve
@@ -26,31 +28,34 @@ class SketchableBezierCurve: Sketchable {
     }
     
     private func calculateSketchableVertices() {
-        let vertices = [
-            SIMD4<Float>(-1.0, 1.0, 1.0, 1.0),     // Front-top-left
-            SIMD4<Float>(1.0, 1.0, 1.0, 1.0),      // Front-top-right
-            SIMD4<Float>(-1.0, -1.0, 1.0,  1.0),   // Front-bottom-left
-            SIMD4<Float>(1.0, -1.0, 1.0, 1.0),     // Front-bottom-right
-            SIMD4<Float>(1.0, -1.0, -1.0, 1.0),    // Back-bottom-right
-            SIMD4<Float>(1.0, 1.0, 1.0,  1.0),     // Front-top-right
-            SIMD4<Float>(1.0, 1.0, -1.0, 1.0),     // Back-top-right
-            SIMD4<Float>(-1.0, 1.0, 1.0,  1.0),    // Front-top-left
-            SIMD4<Float>(-1.0, 1.0, -1.0, 1.0),    // Back-top-left
-            SIMD4<Float>(-1.0, -1.0, 1.0, 1.0),    // Front-bottom-left
-            SIMD4<Float>(-1.0, -1.0, -1.0, 1.0),   // Back-bottom-left
-            SIMD4<Float>(1.0, -1.0, -1.0,  1.0),   // Back-bottom-right
-            SIMD4<Float>(-1.0, 1.0, -1.0, 1.0),    // Back-top-left
-            SIMD4<Float>(1.0, 1.0, -1.0,  1.0)     // Back-top-right
-        ]
+        let points = cubicBezierCurve.getInterpolatedPoints(sampleCount: sampleCount)
         
-        var verticesWithColor = [Vertex]()
-        
-        let thisColor = ColorIndex.worldCurve.rawValue
-        // Create the vector of vertices
-        for i in 0 ..< vertices.count {
-            verticesWithColor.append(Vertex(position: vertices[i], colorIndex: UInt16(thisColor)))
+        self.sketchableVertices = preparePointsForRendering(points: points)
+        //self.sketchableVertices
+    }
+    
+    private func preparePointsForRendering(points: [SIMD3<Float>])->[LineVertex] {
+        var indexedVertices = [LineVertex]()
+        // Repeat each point
+        for i in 0..<points.count {
+            let thisPoint = SIMD4<Float>(points[i], 1)
+            var nextVertex = SIMD4<Float>(-1, -1, -1, -1)
+            var prevVertex = SIMD4<Float>(-1, -1, -1, -1)
+            
+            if i+1 < points.count {
+                nextVertex = SIMD4<Float>(points [i+1], 1)
+            }
+            
+            if i-1 >= 0 {
+                prevVertex = SIMD4<Float>(points[i-1], 1)
+            }
+            
+            let thisVertex = LineVertex(thisVertex: thisPoint, nextVertex: nextVertex, prevVertex: prevVertex, thickness: 0.5, colorIndex: UInt16(ColorIndex.screenCurve.rawValue));
+            let repeatVertex = LineVertex(thisVertex: thisPoint, nextVertex: nextVertex, prevVertex: prevVertex, thickness: -0.5, colorIndex: UInt16(ColorIndex.screenCurve.rawValue));
+            indexedVertices.append(thisVertex);
+            indexedVertices.append(repeatVertex);
         }
         
-        self.sketchableVertices = verticesWithColor
+        return indexedVertices
     }
 }

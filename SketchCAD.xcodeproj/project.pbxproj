@@ -13,6 +13,7 @@
 		FD4B0B3E231F2C7600F0AC98 /* SketchableWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B3D231F2C7600F0AC98 /* SketchableWireFrame.swift */; };
 		FD4B0B47232032F700F0AC98 /* PencilGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */; };
 		FD4B0B492320603900F0AC98 /* PencilGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */; };
+		FD7BFF762443B700003D4886 /* AbstractVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7BFF752443B700003D4886 /* AbstractVertex.swift */; };
 		FD9794CF231F0AFD0078705D /* SketchableSymmetryPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */; };
 		FDB1CA69231E07B600237624 /* Shader2D.metal in Sources */ = {isa = PBXBuildFile; fileRef = FDB1CA68231E07B600237624 /* Shader2D.metal */; };
 		FDD89F4E22F737D600A5A5C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F4D22F737D600A5A5C7 /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		FD4B0B3D231F2C7600F0AC98 /* SketchableWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableWireFrame.swift; sourceTree = "<group>"; };
 		FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilGestureRecognizer.swift; sourceTree = "<group>"; };
 		FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilGestureHandler.swift; sourceTree = "<group>"; };
+		FD7BFF752443B700003D4886 /* AbstractVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractVertex.swift; sourceTree = "<group>"; };
 		FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableSymmetryPlane.swift; sourceTree = "<group>"; };
 		FDB1CA68231E07B600237624 /* Shader2D.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader2D.metal; sourceTree = "<group>"; };
 		FDD89F4A22F737D600A5A5C7 /* SketchCAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchCAD.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 				FD3F869C243C0DB400D758EE /* LineShader.metal */,
 				FDFBAA28231C40620007C130 /* ColorConstants.swift */,
 				FDD89F762300CEC300A5A5C7 /* Camera.swift */,
+				FD7BFF752443B700003D4886 /* AbstractVertex.swift */,
 				FDFBAA24231404610007C130 /* Vertex.swift */,
 				FD3F869E243C2D6400D758EE /* LineVertex.swift */,
 				FDD89F6322F73AAD00A5A5C7 /* Renderer.swift */,
@@ -339,6 +342,7 @@
 				FDD89F732300C59A00A5A5C7 /* AAPLMathUtilities.m in Sources */,
 				FDD89F7B2308D98200A5A5C7 /* CubicBezierCurve.swift in Sources */,
 				FDD89F772300CEC300A5A5C7 /* Camera.swift in Sources */,
+				FD7BFF762443B700003D4886 /* AbstractVertex.swift in Sources */,
 				FDFBAA25231404610007C130 /* Vertex.swift in Sources */,
 				FD4B0B492320603900F0AC98 /* PencilGestureHandler.swift in Sources */,
 				FD4B0B3C231F24BA00F0AC98 /* SketchableBasePlane.swift in Sources */,

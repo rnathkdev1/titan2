@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Vertex {
+struct Vertex: AbstractVertex {
     var position: SIMD4<Float>
     var colorIndex: UInt16
 }

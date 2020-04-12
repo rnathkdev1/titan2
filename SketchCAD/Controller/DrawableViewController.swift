@@ -63,8 +63,8 @@ class DrawableViewController: UIViewController {
         let pencilGestureRecognizer = PencilGestureRecognizer(target: self, action: #selector(strokeUpdated(_:)))
         canvas.addGestureRecognizer(pencilGestureRecognizer)
         
-        // Do any additional setup after loading the view.
-        addDrawableObject()
+        // Draw the playground.
+        addPlayground()
     }
     
     @objc func strokeUpdated(_ strokeGesture: PencilGestureRecognizer) {
@@ -73,7 +73,7 @@ class DrawableViewController: UIViewController {
     
     
     // FIXME: Remove and formalize this
-    func addDrawableObject() {
+    func addPlayground() {
         // Create a viewable cubic bezier curve
         let p0 = SIMD3<Float>(1.0, 1.0, 1.0)
         let p1 = SIMD3<Float>(2.0, 1.0, 1.0)
@@ -90,11 +90,11 @@ class DrawableViewController: UIViewController {
         }
         
         // drawableCanvas.addObject3D(curve: skc);
-        drawableCanvas.addObject3D(curve: SketchableBasePlane())
-        drawableCanvas.addObject3D(curve: SketchableWireFrame())
-        drawableCanvas.addObject3D(curve: SketchableSymmetryPlane())
+        drawableCanvas.addPlaygroundObject(curve: SketchableBasePlane())
+        drawableCanvas.addPlaygroundObject(curve: SketchableWireFrame())
+        drawableCanvas.addPlaygroundObject(curve: SketchableSymmetryPlane())
         //drawableCanvas.addScreenCurve()
-        drawableCanvas.addLine()
+        //drawableCanvas.addLine3D()
     }
     
     

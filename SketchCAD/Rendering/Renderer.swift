@@ -207,11 +207,11 @@ class Renderer: NSObject, MTKViewDelegate {
         
         cumulativeOffset += MemoryLayout<SIMD4<Float>>.stride
         
-        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].format = MTLVertexFormat.int
+        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].format = MTLVertexFormat.float
         mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].offset = cumulativeOffset
         mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
-        cumulativeOffset += MemoryLayout<Int32>.stride
+        cumulativeOffset += MemoryLayout<Float32>.stride
         
         mtlVertexDescriptor.attributes[VertexAttribute.lineColorIndex.rawValue].format = MTLVertexFormat.ushort
         mtlVertexDescriptor.attributes[VertexAttribute.lineColorIndex.rawValue].offset = cumulativeOffset
@@ -221,8 +221,6 @@ class Renderer: NSObject, MTKViewDelegate {
         
         return mtlVertexDescriptor
     }
-    
-    
     
     func buildRenderPipelineWithDevice(device: MTLDevice,
                                          canvas: MTKView,
@@ -356,17 +354,17 @@ class Renderer: NSObject, MTKViewDelegate {
                 renderEncoder.pushDebugGroup("3D Rendering")
                 renderEncoder.setRenderPipelineState(pipelineState3D)
                 
+                // Color vertex buffer
+                renderEncoder.setVertexBuffer(colorBuffer, offset: 0, index: BufferIndex.colors.rawValue)
+                
+                // Uniforms
+                renderEncoder.setVertexBuffer(dynamicUniformBuffer, offset:uniformBufferOffset, index: BufferIndex.uniforms.rawValue)
+                
                 //TODO: Remove this condition.
                 if sketchable3D.count > 0 {
                     
                     // Position buffer
                     renderEncoder.setVertexBuffer(vertexBuffer3D, offset: 0, index: BufferIndex.positions3D.rawValue)
-                    
-                    // Color vertex buffer
-                    renderEncoder.setVertexBuffer(colorBuffer, offset: 0, index: BufferIndex.colors.rawValue)
-                    
-                    // Uniforms
-                    renderEncoder.setVertexBuffer(dynamicUniformBuffer, offset:uniformBufferOffset, index: BufferIndex.uniforms.rawValue)
                     
                     // And finally, we draw each of them
                     var offset = 0
@@ -387,7 +385,7 @@ class Renderer: NSObject, MTKViewDelegate {
                 }
                 
                 renderEncoder.popDebugGroup()
- 
+                /*
                 //MARK: 2D Rendering
                 renderEncoder.pushDebugGroup("2D Rendering")
                 renderEncoder.setRenderPipelineState(pipelineState2D)
@@ -414,6 +412,7 @@ class Renderer: NSObject, MTKViewDelegate {
                     renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: vertexCountLine)
                 }
                 renderEncoder.popDebugGroup()
+                */
                 renderEncoder.endEncoding()
             
                 if let drawable = view.currentDrawable {

@@ -23,7 +23,7 @@ typedef struct
     float4 thisVertex [[attribute(VertexAttributeThisVertex)]];;
     float4 nextVertex [[attribute(VertexAttributeNextVertex)]];;
     float4 prevVertex[[attribute(VertexAttributePrevVertex)]];;
-    int32_t direction[[attribute(VertexAttributeDirection)]];
+    float thickness[[attribute(VertexAttributeDirection)]];
     ushort colorIndex [[attribute(VertexAttributeLineColorIndex)]];
 } VertexIn;
 
@@ -66,12 +66,14 @@ vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
     float2 normal = float2(-dir.y, dir.x);
     
     // Extrude from center and correct aspect ratio
-    float thickness = 0.4;
+    float thickness = abs(vertex_in.thickness);
     normal *= thickness/2.0;
     normal.x /= uniforms.aspectRatio;
     
     // Offset the point in the direction
-    normal *= vertex_in.direction;
+    if (vertex_in.thickness < 0) {
+        normal *= -1;
+    }
     
     float4 offset = float4(normal.x, normal.y, 0.0, 1);
     
