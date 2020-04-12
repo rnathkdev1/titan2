@@ -23,7 +23,8 @@ typedef struct
     float4 thisVertex [[attribute(VertexAttributeThisVertex)]];;
     float4 nextVertex [[attribute(VertexAttributeNextVertex)]];;
     float4 prevVertex[[attribute(VertexAttributePrevVertex)]];;
-    uint16_t colorIndex [[attribute(VertexAttributeColorIndex)]];
+    ushort colorIndex [[attribute(VertexAttributeColorIndex)]];
+    int8_t direction[[attribute(VertexAttributeDirection)]];
 } VertexIn;
 
 typedef struct
@@ -41,27 +42,44 @@ vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
     float4 clipSpaceNext = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.nextVertex;
     float4 clipSpacePrev = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.prevVertex;
     
+    float4 thisToNDC = clipSpaceThis/clipSpaceThis.w;
+    float4 nextToNDC = clipSpaceNext/clipSpaceNext.w;
+    float4 prevToNDC = clipSpacePrev/clipSpacePrev.w;
+    
+    float2 thisNDC = float2(thisToNDC.x, thisToNDC.y);
+    float2 nextNDC = float2(nextToNDC.x, nextToNDC.y);
+    float2 prevNDC = float2(prevToNDC.x, prevToNDC.y);
+    
+    // Transform to screen space
+    thisNDC *= uniforms.aspectRatio;
+    nextNDC *= uniforms.aspectRatio;
+    prevNDC *= uniforms.aspectRatio;
+    
     // Find the tangent
-    float4 dir = normalize(clipSpaceNext - clipSpaceThis);
+    float2 dir = normalize(nextNDC - thisNDC);
+    
     
     // Find the normal
-    float4 normal = float4(-dir.y, dir.x, dir.z, dir.w);
+    float2 normal = float2(-dir.y, dir.x);
+    
+    // Extrude from center and correct aspect ratio
     float thickness = 0.2;
     normal *= thickness/2.0;
+    normal.x /= uniforms.aspectRatio;
     
-    // TODO:
+    // Offset the point in the direction
+    float direction = -1;
+    normal *= direction;
     
+    float4 offset = float4(normal.x, normal.y, 0.0, 1);
     
-    
-    
-    out.position = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.thisVertex;
+    // Return the clip space point
+    out.position = clipSpaceThis + offset;
     uint16_t ind = vertex_in.colorIndex;
     out.color = color_in[ind].color;
     return out;
-     
 }
 
 fragment half4 fragmentShaderLine(VertexOut in [[stage_in]]) {
-    
     return half4(in.color);
 }

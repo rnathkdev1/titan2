@@ -38,6 +38,7 @@ typedef NS_ENUM(NSInteger, VertexAttribute)
     VertexAttributeThisVertex = 4,
     VertexAttributeNextVertex = 5,
     VertexAttributePrevVertex = 6,
+    VertexAttributeDirection = 7,
 };
 
 // Camera parameters

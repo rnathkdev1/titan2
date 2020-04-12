@@ -169,12 +169,12 @@ class Renderer: NSObject, MTKViewDelegate {
         let mtlVertexDescriptor = MTLVertexDescriptor()
         
         // Vertex descriptor is the following:
-        //-------------------------------------------------|
-        //| ThisVertex| NextVertex | PrevVertex| ColorIndex|
-        //-------------------------------------------------| - Buffer BufferIndexPositionsLine
-        //| Attribute | Attribute  | Attribute | Attribute | - attributes are: ThisVertex, NextVertex, PrevVertex, ColorIndex
-        //-------------------------------------------------|
-        //|<----------------Stride------------------------>|
+        //-------------------------------------------------------------|
+        //| ThisVertex| NextVertex | PrevVertex| ColorIndex| Direction |
+        //-------------------------------------------------------------| - Buffer BufferIndexPositionsLine
+        //| Attribute | Attribute  | Attribute | Attribute | Attribute | - attributes are: ThisVertex, NextVertex, PrevVertex, ColorIndex, Direction
+        //-------------------------------------------------------------|
+        //|<----------------------------Stride------------------------>|
 
         // There is one SIMD4<Float> color and one index in a single struct.
         // Both are part of the same vertex buffer.
@@ -193,6 +193,10 @@ class Renderer: NSObject, MTKViewDelegate {
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].format = MTLVertexFormat.ushort
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].offset = MemoryLayout<SIMD4<Float>>.stride
         mtlVertexDescriptor.attributes[VertexAttribute.colorIndex.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
+        
+        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].format = MTLVertexFormat.uint2
+        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].offset = MemoryLayout<Int8>.stride
+        mtlVertexDescriptor.attributes[VertexAttribute.direction.rawValue].bufferIndex = BufferIndex.positionsLine.rawValue
         
         mtlVertexDescriptor.layouts[0].stride = MemoryLayout<LineVertex>.stride
         
