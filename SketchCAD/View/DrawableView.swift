@@ -37,6 +37,7 @@ class DrawableView: MTKView {
     }
     
     func addScreenCurve() {
+        
         let vertices = [
             SIMD4<Float>(-1, -1, 0, 1),
             SIMD4<Float>(1, -1, 0, 1),
@@ -60,10 +61,21 @@ class DrawableView: MTKView {
     }
     
     func addLine() {
+        
+        var points = [SIMD4<Float>]()
+
+        for x in stride(from: -6.0, to: 6.0, by: 0.01) {
+            let y = Float(5*sin(x));
+            let z = Float(4.0);
+            points.append(SIMD4<Float>(Float(x),y,z,1))
+        }
+        
+        /*
         let points = [
             SIMD4<Float>(6,5,5,1),
             SIMD4<Float>(-6,5,5,1)
-        ];
+        ];*/
+        
         
         let lineVertices = preparePointsForRendering(points: points)
         guard let renderer = self.delegate as? Renderer else {
