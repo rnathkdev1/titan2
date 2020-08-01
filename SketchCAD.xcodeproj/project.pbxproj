@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD194C9724D5F57D0092637C /* ScreenspaceLineShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = FD194C9624D5F57D0092637C /* ScreenspaceLineShader.metal */; };
 		FD3F869D243C0DB400D758EE /* LineShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = FD3F869C243C0DB400D758EE /* LineShader.metal */; };
 		FD3F869F243C2D6400D758EE /* LineVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3F869E243C2D6400D758EE /* LineVertex.swift */; };
 		FD4B0B3C231F24BA00F0AC98 /* SketchableBasePlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B3B231F24BA00F0AC98 /* SketchableBasePlane.swift */; };
@@ -14,6 +15,8 @@
 		FD4B0B47232032F700F0AC98 /* PencilGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */; };
 		FD4B0B492320603900F0AC98 /* PencilGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */; };
 		FD7BFF762443B700003D4886 /* AbstractVertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7BFF752443B700003D4886 /* AbstractVertex.swift */; };
+		FD7BFF782443E8A3003D4886 /* SketchableCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7BFF772443E8A3003D4886 /* SketchableCurve.swift */; };
+		FD7BFF7A2443E90E003D4886 /* SketchableSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7BFF792443E90E003D4886 /* SketchableSurface.swift */; };
 		FD9794CF231F0AFD0078705D /* SketchableSymmetryPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */; };
 		FDB1CA69231E07B600237624 /* Shader2D.metal in Sources */ = {isa = PBXBuildFile; fileRef = FDB1CA68231E07B600237624 /* Shader2D.metal */; };
 		FDD89F4E22F737D600A5A5C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD89F4D22F737D600A5A5C7 /* AppDelegate.swift */; };
@@ -48,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD194C9624D5F57D0092637C /* ScreenspaceLineShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ScreenspaceLineShader.metal; sourceTree = "<group>"; };
 		FD3F869C243C0DB400D758EE /* LineShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LineShader.metal; sourceTree = "<group>"; };
 		FD3F869E243C2D6400D758EE /* LineVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineVertex.swift; sourceTree = "<group>"; };
 		FD4B0B3B231F24BA00F0AC98 /* SketchableBasePlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableBasePlane.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		FD4B0B46232032F700F0AC98 /* PencilGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilGestureRecognizer.swift; sourceTree = "<group>"; };
 		FD4B0B482320603900F0AC98 /* PencilGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilGestureHandler.swift; sourceTree = "<group>"; };
 		FD7BFF752443B700003D4886 /* AbstractVertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractVertex.swift; sourceTree = "<group>"; };
+		FD7BFF772443E8A3003D4886 /* SketchableCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableCurve.swift; sourceTree = "<group>"; };
+		FD7BFF792443E90E003D4886 /* SketchableSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableSurface.swift; sourceTree = "<group>"; };
 		FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchableSymmetryPlane.swift; sourceTree = "<group>"; };
 		FDB1CA68231E07B600237624 /* Shader2D.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shader2D.metal; sourceTree = "<group>"; };
 		FDD89F4A22F737D600A5A5C7 /* SketchCAD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchCAD.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				FDFBAA222314013A0007C130 /* Sketchable.swift */,
+				FD7BFF772443E8A3003D4886 /* SketchableCurve.swift */,
+				FD7BFF792443E90E003D4886 /* SketchableSurface.swift */,
 				FDFBAA1F2313FFA70007C130 /* SketchableBezierCurve.swift */,
 				FD9794CE231F0AFD0078705D /* SketchableSymmetryPlane.swift */,
 				FD4B0B3B231F24BA00F0AC98 /* SketchableBasePlane.swift */,
@@ -170,6 +178,7 @@
 				FDD89F6F22FF46B700A5A5C7 /* Shaders3D.metal */,
 				FDB1CA68231E07B600237624 /* Shader2D.metal */,
 				FD3F869C243C0DB400D758EE /* LineShader.metal */,
+				FD194C9624D5F57D0092637C /* ScreenspaceLineShader.metal */,
 				FDFBAA28231C40620007C130 /* ColorConstants.swift */,
 				FDD89F762300CEC300A5A5C7 /* Camera.swift */,
 				FD7BFF752443B700003D4886 /* AbstractVertex.swift */,
@@ -334,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD4B0B47232032F700F0AC98 /* PencilGestureRecognizer.swift in Sources */,
+				FD194C9724D5F57D0092637C /* ScreenspaceLineShader.metal in Sources */,
 				FD9794CF231F0AFD0078705D /* SketchableSymmetryPlane.swift in Sources */,
 				FD3F869D243C0DB400D758EE /* LineShader.metal in Sources */,
 				FDFBAA27231406AF0007C130 /* DrawableView.swift in Sources */,
@@ -349,8 +359,10 @@
 				FDD89F6022F7381600A5A5C7 /* MainViewController.swift in Sources */,
 				FD4B0B3E231F2C7600F0AC98 /* SketchableWireFrame.swift in Sources */,
 				FDFBAA232314013A0007C130 /* Sketchable.swift in Sources */,
+				FD7BFF782443E8A3003D4886 /* SketchableCurve.swift in Sources */,
 				FDFBAA29231C40620007C130 /* ColorConstants.swift in Sources */,
 				FDD89F8D230F925D00A5A5C7 /* Extensions.swift in Sources */,
+				FD7BFF7A2443E90E003D4886 /* SketchableSurface.swift in Sources */,
 				FDD89F4E22F737D600A5A5C7 /* AppDelegate.swift in Sources */,
 				FDFED757243A9DB600D84167 /* SketchableCube.swift in Sources */,
 				FDD89F7022FF46B700A5A5C7 /* Shaders3D.metal in Sources */,

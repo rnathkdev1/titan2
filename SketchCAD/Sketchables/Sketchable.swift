@@ -10,6 +10,5 @@ import Foundation
 import MetalKit
 
 protocol Sketchable {
-    var sketchableVertices: [Vertex] {get}
     var primitiveType: MTLPrimitiveType {get}
 }

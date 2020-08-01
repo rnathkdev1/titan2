@@ -81,7 +81,15 @@ class DrawableViewController: UIViewController {
         let p3 = SIMD3<Float>(4.0, 1.0, 1.0)
         
         let c = CubicBezierCurve(P0: p0, P1: p1, P2: p2, P3: p3)
-        let skc = SketchableBezierCurve(curve: c)
+        let skc = SketchableBezierCurve(curve: c, thickness: 0.5);
+        
+        let p00 = SIMD3<Float>(0.0, 200.0, 0.0)
+        let p11 = SIMD3<Float>(300.0, 200.0, 0.0)
+        let p22 = SIMD3<Float>(600.0, 200.0, 0.0)
+        let p33 = SIMD3<Float>(1326.0, 200.0, 0.0)
+        
+        let c2 = CubicBezierCurve(P0: p00, P1: p11, P2: p22, P3: p33)
+        let skc2 = SketchableBezierCurve(curve: c2, thickness: 0.006);
         
         // Add this curve to the list
         guard let drawableCanvas = view as? DrawableView else {
@@ -93,8 +101,9 @@ class DrawableViewController: UIViewController {
         drawableCanvas.addPlaygroundObject(curve: SketchableBasePlane())
         drawableCanvas.addPlaygroundObject(curve: SketchableWireFrame())
         drawableCanvas.addPlaygroundObject(curve: SketchableSymmetryPlane())
-        //drawableCanvas.addScreenCurve()
-        //drawableCanvas.addLine3D()
+        
+        drawableCanvas.addLine3D(curve: skc)
+        drawableCanvas.addScreenCurve(curve: skc2)
     }
     
     

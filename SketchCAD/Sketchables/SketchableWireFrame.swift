@@ -9,7 +9,7 @@
 import Foundation
 import MetalKit
 
-class SketchableWireFrame: Sketchable {
+class SketchableWireFrame: SketchableSurface {
     var primitiveType: MTLPrimitiveType = .line
     
     var sketchableVertices = [Vertex]()

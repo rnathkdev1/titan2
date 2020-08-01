@@ -11,7 +11,7 @@ import MetalKit
 // Playground sits at z = 0
 // Center of the playground is at Origin
 
-class SketchableSymmetryPlane: Sketchable {
+class SketchableSymmetryPlane: SketchableSurface {
     var primitiveType: MTLPrimitiveType = .triangleStrip
     var sketchableVertices = [Vertex]()
     let side: Float = 4.0

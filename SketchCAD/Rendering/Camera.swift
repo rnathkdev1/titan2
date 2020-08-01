@@ -63,6 +63,7 @@ class Camera {
     // MARK: Matrices
     private(set) var projectionMatrix: matrix_float4x4
     private(set) var viewMatrix: matrix_float4x4
+    private(set) var screenspaceProjectionMatrix: matrix_float4x4
     private(set) var aspectRatio: Float
     
     // Initializer for camera
@@ -81,6 +82,13 @@ class Camera {
         self.viewMatrix = matrix_look_at(position[0], position[1], position[2],
                                          lookAt[0], lookAt[1], lookAt[2],
                                          up[0], up[1], up[2]);
+        
+        let col1  = SIMD4<Float>(2.0/Float(viewSize.width), 0.0, 0.0, 0.0);
+        let col2  = SIMD4<Float>(0.0, 2.0/Float(viewSize.height), 0.0, 0.0);
+        let col3  = SIMD4<Float>(0.0, 0.0, 0.0, 0.0);
+        let col4  = SIMD4<Float>(-1.0, -1.0, 0.0, 1.0);
+        
+        self.screenspaceProjectionMatrix = matrix_float4x4(col1, col2, col3, col4);
     }
     
     // Update projection and view matrices.
@@ -91,6 +99,13 @@ class Camera {
         self.viewMatrix = matrix_look_at(position[0], position[1], position[2],
                                          lookAt[0], lookAt[1], lookAt[2],
                                          up[0], up[1], up[2]);
+        
+        let col1  = SIMD4<Float>(2.0/Float(viewSize.width), 0.0, 0.0, 0.0);
+        let col2  = SIMD4<Float>(0.0, 2.0/Float(viewSize.height), 0.0, 0.0);
+        let col3  = SIMD4<Float>(0.0, 0.0, 0.0, 0.0);
+        let col4  = SIMD4<Float>(-1.0, -1.0, 0.0, 1.0);
+        print(viewSize)
+        self.screenspaceProjectionMatrix = matrix_float4x4(col1, col2, col3, col4);
     }
     
     func updateViewFromBounds(size: CGSize) {

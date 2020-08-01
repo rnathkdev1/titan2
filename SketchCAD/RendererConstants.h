@@ -23,9 +23,12 @@
 typedef NS_ENUM(NSInteger, BufferIndex)
 {
     BufferIndexPositions3D = 0,
+    
     // This can be the same buffer index
     // since they are different vertex descriptors.
     BufferIndexPositionsLine = 0,
+    BufferIndexPositionsScreenspaceLine = 0,
+
     BufferIndexUniforms = 1,
     BufferIndexColors = 2,
 };
@@ -37,7 +40,8 @@ typedef NS_ENUM(NSInteger, VertexAttribute)
     VertexAttributeColorIndex = 1,
     VertexAttributeIndex2D = 2,
 
-    // These are part of a different vertex descriptor
+    // These are part of the LineShader vertex
+    // descriptor, so they can have same indices
     VertexAttributeThisVertex = 1,
     VertexAttributeNextVertex = 2,
     VertexAttributePrevVertex = 3,
@@ -50,7 +54,8 @@ typedef struct
 {
     matrix_float4x4 projectionMatrix;
     matrix_float4x4 modelViewMatrix;
-    float aspectRatio; 
+    matrix_float4x4 screenspaceProjectionMatrix;
+    float aspectRatio;
 } Transforms;
 
 // Color constant parameters

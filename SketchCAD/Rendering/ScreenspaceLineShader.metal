@@ -1,10 +1,10 @@
 //
-//  LineShader.metal
+//  ScreenspaceLineShader.metal
 //  SketchCAD
 //
-//  Created by Ramnath Pillai on 4/6/20.
+//  Created by Ramnath Pillai on 8/1/20.
 //  Copyright © 2020 Oxymoron. All rights reserved.
-//  This is the shader for world space lines 
+//  This is the shader for screenspace lines.
 
 #include <metal_stdlib>
 #include <simd/simd.h>
@@ -23,20 +23,18 @@ typedef struct
     ushort colorIndex [[attribute(VertexAttributeLineColorIndex)]];
 } VertexIn;
 
-typedef struct
-{
-    // [[position]] denotes the clip space position
+typedef struct {
     float4 position [[position]];
     float4 color;
 } VertexOut;
 
-vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
-                              constant Colors *color_in [[buffer(BufferIndexColors)]],
-                              constant Transforms& uniforms [[buffer(BufferIndexUniforms)]]) {
+vertex VertexOut vertexShaderScreenspaceLine(VertexIn vertex_in [[stage_in]],
+                                constant Colors *color_in [[buffer(BufferIndexColors)]],
+                                constant Transforms& uniforms [[buffer(BufferIndexUniforms)]]) {
     VertexOut out;
-    float4 clipSpaceThis = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.thisVertex;
-    float4 clipSpaceNext = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.nextVertex;
-    float4 clipSpacePrev = uniforms.projectionMatrix * uniforms.modelViewMatrix * vertex_in.prevVertex;
+    float4 clipSpaceThis = uniforms.screenspaceProjectionMatrix * vertex_in.thisVertex;
+    float4 clipSpaceNext = uniforms.screenspaceProjectionMatrix * vertex_in.nextVertex;
+    float4 clipSpacePrev = uniforms.screenspaceProjectionMatrix * vertex_in.prevVertex;
     
     float4 thisToNDC = clipSpaceThis/clipSpaceThis.w;
     float4 nextToNDC = clipSpaceNext/clipSpaceNext.w;
@@ -71,7 +69,7 @@ vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
         normal *= -1;
     }
     
-    float4 offset = float4(normal.x, normal.y, 0.0, 1);
+    float4 offset = float4(normal.x, normal.y, 0.0, 0.0);
     
     // Return the clip space point
     out.position = clipSpaceThis + offset;
@@ -80,6 +78,7 @@ vertex VertexOut vertexShaderLine(VertexIn vertex_in [[stage_in]],
     return out;
 }
 
-fragment half4 fragmentShaderLine(VertexOut in [[stage_in]]) {
+
+fragment half4 fragmentShaderScreenspaceLine(VertexOut in [[stage_in]]) {
     return half4(in.color);
 }

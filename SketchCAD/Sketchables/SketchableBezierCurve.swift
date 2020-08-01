@@ -10,7 +10,7 @@ import Foundation
 import MetalKit
 
 // This is the Bezier curve that is seen on screen
-class SketchableBezierCurve {
+class SketchableBezierCurve:SketchableCurve {
     var primitiveType: MTLPrimitiveType = .triangleStrip
     var sketchableVertices = [LineVertex]()
     
@@ -18,12 +18,14 @@ class SketchableBezierCurve {
     var controlPointsVisible: Bool
     var isSelected: Bool
     
-    let sampleCount = 50;
+    let sampleCount = 3;
     
-    init(curve: CubicBezierCurve){
+    var thickness:Float32 = 0.5;
+    init(curve: CubicBezierCurve, thickness: Float32){
         self.cubicBezierCurve = curve
         self.controlPointsVisible = false
         self.isSelected = false
+        self.thickness = thickness
         calculateSketchableVertices()
     }
     
@@ -31,7 +33,6 @@ class SketchableBezierCurve {
         let points = cubicBezierCurve.getInterpolatedPoints(sampleCount: sampleCount)
         
         self.sketchableVertices = preparePointsForRendering(points: points)
-        //self.sketchableVertices
     }
     
     private func preparePointsForRendering(points: [SIMD3<Float>])->[LineVertex] {
@@ -50,8 +51,8 @@ class SketchableBezierCurve {
                 prevVertex = SIMD4<Float>(points[i-1], 1)
             }
             
-            let thisVertex = LineVertex(thisVertex: thisPoint, nextVertex: nextVertex, prevVertex: prevVertex, thickness: 0.5, colorIndex: UInt16(ColorIndex.screenCurve.rawValue));
-            let repeatVertex = LineVertex(thisVertex: thisPoint, nextVertex: nextVertex, prevVertex: prevVertex, thickness: -0.5, colorIndex: UInt16(ColorIndex.screenCurve.rawValue));
+            let thisVertex = LineVertex(thisVertex: thisPoint, nextVertex: nextVertex, prevVertex: prevVertex, thickness: thickness, colorIndex: UInt16(ColorIndex.screenCurve.rawValue));
+            let repeatVertex = LineVertex(thisVertex: thisPoint, nextVertex: nextVertex, prevVertex: prevVertex, thickness: -thickness, colorIndex: UInt16(ColorIndex.screenCurve.rawValue));
             indexedVertices.append(thisVertex);
             indexedVertices.append(repeatVertex);
         }

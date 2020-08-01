@@ -33,7 +33,7 @@ class DrawableView: MTKView {
     }
     
     // MARK: Add sketchable playground
-    func addPlaygroundObject(curve: Sketchable) {
+    func addPlaygroundObject(curve: SketchableSurface) {
         self.playground.append(curve);
         
         guard let renderer = self.delegate as? Renderer else {
@@ -60,7 +60,7 @@ class DrawableView: MTKView {
     /**
      Function to add a 3D curve to the renderer
      */
-    func addLine3D(curve: Sketchable) {
+    func addLine3D(curve: SketchableCurve) {
         /*
         var points = [SIMD4<Float>]()
 
@@ -69,9 +69,9 @@ class DrawableView: MTKView {
             let z = Float(4.0);
             points.append(SIMD4<Float>(Float(x),y,z,1))
         }
+        */
 
-        let lineVertices = preparePointsForRendering(points: points)
-         */
+        // let lineVertices = preparePointsForRendering(points: points)
         
         guard let renderer = self.delegate as? Renderer else {
             //FIXME: Add an error message
@@ -79,33 +79,18 @@ class DrawableView: MTKView {
             return;
         }
         
-        // renderer.addVerticesLine(vertices: lineVertices)
+        renderer.addVerticesLine(vertices: curve.sketchableVertices)
     }
     
-    /*
-    func addScreenCurve() {
-        
-        let vertices = [
-            SIMD4<Float>(-1, -1, 0, 1),
-            SIMD4<Float>(1, -1, 0, 1),
-            SIMD4<Float>(0,  0, 0, 1),
-        ]
-        
-        var indexedVertices = [Vertex]()
-        for i in 0..<vertices.count {
-            let thisVertex = Vertex(position: vertices[i],
-                                    colorIndex: UInt16(ColorIndex.screenCurve.rawValue))
-            indexedVertices.append(thisVertex)
-        }
-        
+    func addScreenCurve(curve: SketchableCurve) {
         guard let renderer = self.delegate as? Renderer else {
             //FIXME: Add an error message
             print("Delegate is not Renderer")
             return;
         }
         
-        renderer.addVertices2D(vertices: indexedVertices)
-    }*/
+        renderer.addScreenspaceLine(vertices: curve.sketchableVertices)
+    }
 
     /*
     // Only override draw() if you perform custom drawing.
